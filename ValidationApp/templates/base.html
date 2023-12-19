@@ -1,0 +1,107 @@
+<!-- ValidationApp/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}My Django Project{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url('/media/mjv.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default margin to ensure full background coverage */
+            padding: 0; /* Remove default padding */
+            font-family: 'Arial', sans-serif; /* Optional: Set a default font */
+        }
+
+        nav {
+            /* Customize your navigation bar styles here */
+            background-color: #ffffff; /* Example: White background */
+            padding: 10px; /* Example: 10 pixels of padding */
+        }
+
+        .translucent-form-overlay {
+            /* Add any specific styles for the translucent form overlay */
+            /* Example: Set background color and padding */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+        }
+
+        /* Add more styles for other elements as needed */
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div><a class="navbar-brand" href="{% url 'home' %}" class="btn btn-secondary">home</a></div>
+        <div><a class="navbar-brand" href="{% url 'logout' %}" class="btn btn-secondary">logout</a></div>
+    </div>
+</nav>
+
+<div class="translucent-form-overlay">
+    <form>
+        <!-- Include the content of the specific form you want to show -->
+        {% block overlay_content %}{% endblock %}
+    </form>
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIc3vMR7X1iIOWAWK8mgS7suN8/H9Q"
+        crossorigin="anonymous"></script>
+
+<!-- Modals for Add Vehicle and View Vehicles -->
+<div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog" aria-labelledby="addVehicleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addVehicleModalLabel">Add Vehicle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Include the content of the specific form you want to show -->
+                {% include 'add_vehicle_form.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewVehiclesModal" tabindex="-1" role="dialog" aria-labelledby="viewVehiclesModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewVehiclesModalLabel">View Vehicles</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Include the content of the specific form you want to show -->
+                {% include 'view_vehicles_form.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
