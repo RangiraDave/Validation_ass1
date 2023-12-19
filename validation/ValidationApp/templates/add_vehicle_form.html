@@ -1,0 +1,28 @@
+<!-- ValidationApp/templates/view_vehicles_form.html -->
+
+<form>
+    <!-- Add content to view vehicles -->
+    <h3>View Vehicles</h3>
+    <!-- You can add a table, list, or any other content here -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Plate Number</th>
+            <th scope="col">Model</th>
+            <th scope="col">Make</th>
+            <th scope="col">Color</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Add loop to display vehicle information -->
+        {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.plate_number }}</td>
+                <td>{{ vehicle.model }}</td>
+                <td>{{ vehicle.make }}</td>
+                <td>{{ vehicle.color }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
