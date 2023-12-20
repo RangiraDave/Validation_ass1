@@ -11,6 +11,8 @@ def validate_email_domain(value):
         raise ValidationError(_('Email must end with ".ur.ac.rw"'))
     if '@' not in value:
         raise ValidationError(_('Email must contain @ character'))
+    if Participant.objects.filter(email__iexact=value).exists():
+        raise ValidationError(_('This email address is already registered. Please use a different one.'))
 
 def validate_phone_number(value):
     if not value.startswith('+250'):

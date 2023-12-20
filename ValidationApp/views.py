@@ -7,6 +7,31 @@ from django.contrib.auth import login as auth_login, logout
 from django.forms import formset_factory
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# File handler for application logs
+handler = logging.FileHandler('logs/application.log')
+handler.setLevel(logging.INFO)
+
+# Formatter for application logs
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+
+easyaudit_logger = logging.getLogger('easyaudit')
+easyaudit_logger.setLevel(logging.DEBUG)
+
+easyaudit_handler = logging.FileHandler('logs/easyaudit.log')
+easyaudit_handler.setLevel(logging.DEBUG)
+
+easyaudit_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+easyaudit_handler.setFormatter(easyaudit_formatter)
+
+easyaudit_logger.addHandler(easyaudit_handler)
 
 def registration_view(request):
     VehicleFormSet = formset_factory(VehicleForm, extra=1)
@@ -24,6 +49,8 @@ def registration_view(request):
                     vehicle.save()
 
             return redirect('registration_success')
+        else:
+            print(formset.errors)
     else:
         form = RegistrationForm()
         formset = VehicleFormSet(prefix='vehicle')
@@ -44,6 +71,8 @@ def register_vehicle_view(request):
                 if form.has_changed():
                     form.save()
             return redirect('registration_success')
+        else:
+            print(formset.errors)
     else:
         formset = VehicleFormSet(prefix='vehicles')
 
